@@ -35,7 +35,6 @@
 namespace OCA\DAV;
 
 use OC\Profiler\Profiler;
-use OC\Profiler\RoutingDataCollector;
 use OCA\DAV\Profiler\ProfilerPlugin;
 use OCP\AppFramework\Http\Response;
 use OCP\Diagnostics\IEventLogger;
@@ -132,7 +131,7 @@ class Server {
 		$this->server->setBaseUri($this->baseUri);
 
 
-		$this->server->addPlugin(new ProfilerPlugin($this->profiler));
+		$this->server->addPlugin(new ProfilerPlugin($this->request, $this->profiler));
 		$this->server->addPlugin(new BlockLegacyClientPlugin(\OC::$server->getConfig()));
 		$this->server->addPlugin(new AnonymousOptionsPlugin());
 		$authPlugin = new Plugin();
