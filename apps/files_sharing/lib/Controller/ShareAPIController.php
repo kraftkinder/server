@@ -1003,6 +1003,14 @@ class ShareAPIController extends OCSController {
 		return new DataResponse(array_values($shares));
 	}
 
+	/**
+	 * Check wether a permissions set contains some permissions.
+	 * @return bool
+	 */
+	private function hasPermission(int $permissionsSet, int $permissionsToCheck) {
+		return ($permissionsSet & $permissionsToCheck) === $permissionsToCheck;
+	}
+
 
 	/**
 	 * @NoAdminRequired
@@ -1104,16 +1112,16 @@ class ShareAPIController extends OCSController {
 				$newPermissions = $newPermissions & ~Constants::PERMISSION_SHARE;
 			}
 
-			if ($newPermissions !== null &&
-				!in_array($newPermissions, [
-					Constants::PERMISSION_READ,
-					Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE, // legacy
-					Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE | Constants::PERMISSION_DELETE, // correct
-					Constants::PERMISSION_CREATE, // hidden file list
-					Constants::PERMISSION_READ | Constants::PERMISSION_UPDATE, // allow to edit single files
-				], true)
-			) {
-				throw new OCSBadRequestException($this->l->t('Cannot change permissions for public share links'));
+			if ($newPermissions !== null) {
+				if (!$this->hasPermission($newPermissions, Constants::PERMISSION_READ) && !$this->hasPermission($newPermissions, Constants::PERMISSION_CREATE)) {
+					throw new OCSBadRequestException($this->l->t('Share must at least have READ or CREATE permissions'));
+				}
+
+				if (!$this->hasPermission($newPermissions, Constants::PERMISSION_READ) && (
+						$this->hasPermission($newPermissions, Constants::PERMISSION_UPDATE) || $this->hasPermission($newPermissions, Constants::PERMISSION_DELETE)
+					)) {
+					throw new OCSBadRequestException($this->l->t('Share must have READ permission if UPDATE or DELETE permission is set.'));
+				}
 			}
 
 			if (
