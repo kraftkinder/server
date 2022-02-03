@@ -1268,6 +1268,8 @@ class CardDavBackend implements BackendInterface, SyncSupport {
 				]
 			);
 
+
+		$this->db->beginTransaction();
 		foreach ($vCard->children() as $property) {
 			if (!in_array($property->name, self::$indexProperties)) {
 				continue;
@@ -1284,6 +1286,7 @@ class CardDavBackend implements BackendInterface, SyncSupport {
 			$query->setParameter('preferred', $preferred);
 			$query->execute();
 		}
+		$this->db->commit();
 	}
 
 	/**
