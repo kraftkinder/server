@@ -407,8 +407,9 @@ class OC {
 	}
 
 	public static function initSession() {
-		if (self::$server->getRequest()->getHeader('Authorization') !== '') {
+		if (self::$server->getRequest()->getHeader('Authorization') !== '' && !isset($_COOKIE[OC_Util::getInstanceId()])) {
 			// Do not initialize the session if a request is authenticated directly
+			// unless there is a session cookie already sent along
 			return;
 		}
 		if (self::$server->getRequest()->getServerProtocol() === 'https') {
