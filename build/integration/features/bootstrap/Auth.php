@@ -66,7 +66,7 @@ trait Auth {
 			} else {
 				$options = [];
 			}
-			if ($authHeader && !$useCookies) {
+			if ($authHeader) {
 				$options['headers'] = [
 					'Authorization' => $authHeader
 				];
@@ -111,11 +111,6 @@ trait Auth {
 			'cookies' => $this->cookieJar,
 		];
 
-		if ($loginViaWeb) {
-			// Session cookies are used instead
-			unset($options['auth']);
-		}
-
 		try {
 			$this->response = $client->request('POST', $fullUrl, $options);
 		} catch (\GuzzleHttp\Exception\ServerException $e) {
@@ -133,6 +128,7 @@ trait Auth {
 		$fullUrl = substr($this->baseUrl, 0, -5) . '/index.php/settings/personal/authtokens/' . $newCreatedTokenId;
 		$client = new Client();
 		$options = [
+			'auth' => ['user0', '123456'],
 			'headers' => [
 				'requesttoken' => $this->requestToken,
 			],
