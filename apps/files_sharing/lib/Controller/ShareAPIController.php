@@ -1004,10 +1004,9 @@ class ShareAPIController extends OCSController {
 	}
 
 	/**
-	 * Check wether a permissions set contains some permissions.
-	 * @return bool
+	 * Check whether a set of permissions contains the permissions to check.
 	 */
-	private function hasPermission(int $permissionsSet, int $permissionsToCheck) {
+	private function hasPermission(int $permissionsSet, int $permissionsToCheck): bool {
 		return ($permissionsSet & $permissionsToCheck) === $permissionsToCheck;
 	}
 

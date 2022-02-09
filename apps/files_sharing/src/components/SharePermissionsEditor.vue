@@ -116,8 +116,8 @@ import {
 	canTogglePermissions,
 } from '../lib/SharePermissionsToolBox'
 
-import Tune from 'vue-material-design-icons/Tune.vue'
-import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
+import Tune from 'vue-material-design-icons/Tune'
+import ChevronLeft from 'vue-material-design-icons/ChevronLeft'
 
 export default {
 	name: 'SharePermissionsEditor',
@@ -134,7 +134,7 @@ export default {
 
 	data() {
 		return {
-			randomFormName: Math.random().toString(27).substr(2),
+			randomFormName: Math.random().toString(27).substring(2),
 
 			showCustomPermissionsForm: false,
 
@@ -170,7 +170,7 @@ export default {
 		},
 
 		/**
-		 * Return wether the share's permission is a bundle.
+		 * Return whether the share's permission is a bundle.
 		 *
 		 * @return {boolean}
 		 */
@@ -182,7 +182,7 @@ export default {
 		},
 
 		/**
-		 * Return wether the share's permission is valid.
+		 * Return whether the share's permission is valid.
 		 *
 		 * @return {boolean}
 		 */
@@ -218,7 +218,7 @@ export default {
 
 	methods: {
 		/**
-		 * Return wether the share has the exact given permissions.
+		 * Return whether the share has the exact given permissions.
 		 *
 		 * @param {number} permissions - the permissions to check.
 		 *
@@ -230,7 +230,7 @@ export default {
 		},
 
 		/**
-		 * Return wether the share has the given permissions.
+		 * Return whether the share has the given permissions.
 		 *
 		 * @param {number} permissions - the permissions to check.
 		 *
@@ -248,12 +248,12 @@ export default {
 		 * @return {void}
 		 */
 		setSharePermissions(permissions) {
-			this.share.permissions = parseInt(permissions, 10)
+			this.share.permissions = permissions
 			this.queueUpdate('permissions')
 		},
 
 		/**
-		 * Return wether some given permissions can be toggled.
+		 * Return whether some given permissions can be toggled.
 		 *
 		 * @param {number} permissionsToToggle - the permissions to toggle.
 		 *

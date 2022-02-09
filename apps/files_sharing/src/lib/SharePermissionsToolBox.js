@@ -37,7 +37,7 @@ export const BUNDLED_PERMISSIONS = {
 }
 
 /**
- * Return wether a given permissions set contains some permissions.
+ * Return whether a given permissions set contains some permissions.
  *
  * @param {number} initialPermissionSet - the permissions set.
  * @param {number} permissionsToCheck - the permissions to check.
@@ -48,7 +48,7 @@ export function hasPermissions(initialPermissionSet, permissionsToCheck) {
 }
 
 /**
- * Return wether a given permissions set is valid.
+ * Return whether a given permissions set is valid.
  *
  * @param {number} permissionsSet - the permissions set.
  *
@@ -111,7 +111,7 @@ export function togglePermissions(initialPermissionSet, permissionsToToggle) {
 }
 
 /**
- * Return wether some given permissions can be toggled from a permission set.
+ * Return whether some given permissions can be toggled from a permission set.
  *
  * @param {number} permissionSet - the initial permissions set.
  * @param {number} permissionsToToggle - the permissions to toggle.
