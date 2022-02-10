@@ -79,6 +79,7 @@ module.exports = {
 		'vue-settings-personal-webauthn': path.join(__dirname, 'apps/settings/src', 'main-personal-webauth.js'),
 		'vue-settings-nextcloud-pdf': path.join(__dirname, 'apps/settings/src', 'main-nextcloud-pdf.js'),
 		'vue-settings-personal-info': path.join(__dirname, 'apps/settings/src', 'main-personal-info.js'),
+		'legacy-admin': path.join(__dirname, 'apps/settings/src', 'admin.js'),
 	},
 	systemtags: {
 		systemtags: path.join(__dirname, 'apps/systemtags/src', 'systemtags.js'),
