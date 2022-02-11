@@ -184,13 +184,13 @@ class ViewController extends Controller {
 	 * @throws NotFoundException
 	 */
 	public function index($dir = '', $view = '', $fileid = null, $fileNotFound = false, $openfile = null) {
-		if ($fileid !== null) {
-			try {
-				return $this->redirectToFile($fileid);
-			} catch (NotFoundException $e) {
-				return new RedirectResponse($this->urlGenerator->linkToRoute('files.view.index', ['fileNotFound' => true]));
-			}
-		}
+		// if ($fileid !== null) {
+		// 	try {
+		// 		return $this->redirectToFile($fileid);
+		// 	} catch (NotFoundException $e) {
+		// 		return new RedirectResponse($this->urlGenerator->linkToRoute('files.view.index', ['fileNotFound' => true]));
+		// 	}
+		// }
 
 		$nav = new \OCP\Template('files', 'appnavigation', '');
 
