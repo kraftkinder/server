@@ -792,6 +792,7 @@ class OC {
 			}
 		}
 		$eventLogger->end('boot');
+		$eventLogger->log('init', 'OC::init', $loaderStart, microtime(true));
 	}
 
 	/**

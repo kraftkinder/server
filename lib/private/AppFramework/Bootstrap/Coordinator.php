@@ -126,7 +126,9 @@ class Coordinator {
 						continue;
 					}
 
+					\OC::$server->getEventLogger()->start('register_app_' . $appId, '');
 					$application->register($this->registrationContext->for($appId));
+					\OC::$server->getEventLogger()->end('register_app_' . $appId, '');
 				}
 			} catch (Throwable $e) {
 				$this->logger->emergency('Error during app service registration: ' . $e->getMessage(), [
@@ -172,6 +174,7 @@ class Coordinator {
 		 * the instance was already created for register, but any other
 		 * (legacy) code will now do their magic via the constructor.
 		 */
+		\OC::$server->getEventLogger()->start('boot_app_' . $appId, '');
 		try {
 			/** @var App $application */
 			$application = $this->serverContainer->query($applicationClassName);
@@ -189,6 +192,7 @@ class Coordinator {
 				'exception' => $e,
 			]);
 		}
+		\OC::$server->getEventLogger()->end('boot_app_' . $appId, '');
 	}
 
 	public function isBootable(string $appId) {
