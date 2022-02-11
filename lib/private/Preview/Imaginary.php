@@ -87,7 +87,12 @@ class Imaginary extends ProviderV2 {
 			return null;
 		}
 
-		$image = new StreamImage($response->getBody(), 'image/jpeg', $maxX, $maxY);
+		if ($response->getHeader('X-Image-Width') && $response->getHeader('X-Image-Height')) {
+			$maxX = (int)$response->getHeader('X-Image-Width');
+			$maxY = (int)$response->getHeader('X-Image-Height');
+		}
+
+		$image = new StreamImage($response->getBody(), $response->getHeader('Content-Type'), $maxX, $maxY);
 		return $image->valid() ? $image : null;
 	}
 }
