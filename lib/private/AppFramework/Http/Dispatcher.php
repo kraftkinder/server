@@ -84,7 +84,7 @@ class Dispatcher {
 	 * @param IConfig $config
 	 * @param ConnectionAdapter $connection
 	 * @param LoggerInterface $logger
-	 * @param EventLogger $eventLogger
+	 * @param IEventLogger $eventLogger
 	 */
 	public function __construct(Http $protocol,
 								MiddlewareDispatcher $middlewareDispatcher,
@@ -93,7 +93,7 @@ class Dispatcher {
 								IConfig $config,
 								ConnectionAdapter $connection,
 								LoggerInterface $logger,
-								EventLogger $eventLogger) {
+								IEventLogger $eventLogger) {
 		$this->protocol = $protocol;
 		$this->middlewareDispatcher = $middlewareDispatcher;
 		$this->reflector = $reflector;
